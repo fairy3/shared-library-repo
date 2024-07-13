@@ -1,5 +1,5 @@
 def call() {
-   def userFullName = org.UserUtils.getBuildUserFullName(this)
+   def userFullName = org.UserUtils.getBuildUserName(this)
    if (userFullName) {
         echo "Hello, ${userFullName}"
    } else {
