@@ -1,3 +1,8 @@
-def call(String name = 'World') {
-    echo "Hello, ${name}!"
-}
+def call() {
+    def user = currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause)?.userId
+    if (user) {
+        echo "Hello, ${user}!"
+    } else {
+        echo "Hello, World!"
+    }
+}    

@@ -1,5 +1,6 @@
-def call(String nexusUser, String nexusPassword, String nexusProtocol, String nexusUrl, String nexusRepo) {
-    sh '''
-        docker login -u ${nexusUser} -p ${nexusPassword} ${nexusProtocol}://${nexusUrl}/repository/${nexusRepo}"
-    '''
+def call(String credentialsId, String nexusProtocol, String nexusUrl, String nexusRepo) {
+   withCredentials([usernamePassword(credentialsId: credentialId, usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+        echo "Logging in to Nexus as ${NEXUS_USERNAME}"
+        sh "docker login -u ${NEXUS_USERNAME} -p ${NEXUS_PASSWORD} ${nexusProtocol}://${nexusUrl}/repository/${nexusRepo}"
+   }
 }
